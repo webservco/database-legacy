@@ -16,14 +16,14 @@
             "dealerdirect/phpcodesniffer-composer-installer": true
         }
     },
-    "description" : "A PHP component/library project skeleton.",
+    "description" : "A PHP component.",
     "homepage" : "https://webserv.co",
     "keywords" : [
         "component",
         "webservco"
     ],
     "license" : "MIT",
-    "name" : "webservco/component",
+    "name" : "webservco/database-legacy",
     "require-dev": {
         "pds/skeleton": "^1",
         "phan/phan": "^5",
