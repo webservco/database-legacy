@@ -41,7 +41,8 @@
         "webservco/coding-standards": "^0"
     },
     "require": {
-        "php" : "^8.2"
+        "php" : "^8.2",
+	    "webservco/configuration-legacy": "^0"
     },
     "scripts": {
         "check:lint": "vendor/bin/parallel-lint bin config public resources src tests",
