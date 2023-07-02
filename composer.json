@@ -16,7 +16,7 @@
             "dealerdirect/phpcodesniffer-composer-installer": true
         }
     },
-    "description" : "A PHP component.",
+    "description" : "A PHP component/library.",
     "homepage" : "https://webserv.co",
     "keywords" : [
         "component",
