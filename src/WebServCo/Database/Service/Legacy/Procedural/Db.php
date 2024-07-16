@@ -31,6 +31,26 @@ final class Db
     private static ?mysqli $mysqli = null;
 
     /**
+     * Begins a transaction.
+     */
+    public static function beginTransaction(): bool
+    {
+        $mysqli = self::initialize();
+
+        return $mysqli->begin_transaction();
+    }
+
+    /**
+     * Commits the current transaction.
+     */
+    public static function commitTransaction(): bool
+    {
+        $mysqli = self::initialize();
+
+        return $mysqli->commit();
+    }
+
+    /**
      * Escapes special characters in a string for use in an SQL statement.
      */
     public static function escape(?string $string): ?string
@@ -121,5 +141,15 @@ final class Db
         }
 
         return $row[$field];
+    }
+
+    /**
+     * Rolls back current transaction.
+     */
+    public static function rollbackTransaction(): bool
+    {
+        $mysqli = self::initialize();
+
+        return $mysqli->rollback();
     }
 }
