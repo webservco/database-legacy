@@ -35,7 +35,7 @@ final class Db
      */
     public static function beginTransaction(): bool
     {
-        $mysqli = self::initialize();
+        $mysqli = self::link();
 
         return $mysqli->begin_transaction();
     }
@@ -45,7 +45,7 @@ final class Db
      */
     public static function commitTransaction(): bool
     {
-        $mysqli = self::initialize();
+        $mysqli = self::link();
 
         return $mysqli->commit();
     }
@@ -59,7 +59,7 @@ final class Db
             return $string;
         }
 
-        $mysqli = self::initialize();
+        $mysqli = self::link();
 
         return $mysqli->real_escape_string($string);
     }
@@ -74,7 +74,7 @@ final class Db
         return $result->fetch_assoc();
     }
 
-    public static function initialize(): mysqli
+    public static function link(): mysqli
     {
         if (self::$mysqli instanceof mysqli) {
             return self::$mysqli;
@@ -99,7 +99,7 @@ final class Db
      */
     public static function insertId(): int|string
     {
-        $mysqli = self::initialize();
+        $mysqli = self::link();
 
         return $mysqli->insert_id;
     }
@@ -117,7 +117,7 @@ final class Db
      */
     public static function query(string $query): mysqli_result|bool
     {
-        $mysqli = self::initialize();
+        $mysqli = self::link();
 
         return $mysqli->query($query);
     }
@@ -148,7 +148,7 @@ final class Db
      */
     public static function rollbackTransaction(): bool
     {
-        $mysqli = self::initialize();
+        $mysqli = self::link();
 
         return $mysqli->rollback();
     }
