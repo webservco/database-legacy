@@ -1,4 +1,5 @@
 .docker
+.idea/
 composer.lock
 config/.env.ini
 vendor/
