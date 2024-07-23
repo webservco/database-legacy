@@ -87,6 +87,7 @@ final class Db
             Cfg::getString('DB_USER'),
             Cfg::getString('DB_PASSWORD'),
             Cfg::getString('DB_NAME'),
+            Cfg::getInt('DB_PORT'),
         );
 
         self::$mysqli->set_charset('utf8mb4');
