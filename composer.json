@@ -26,6 +26,7 @@
     "name" : "webservco/database-legacy",
     "require": {
         "php" : "^8.3",
+        "ext-mysqli": "*",
 	    "webservco/configuration-legacy": "^0"
     },
     "require-dev": {
