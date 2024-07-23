@@ -6,6 +6,7 @@ namespace WebServCo\Database\Service\Legacy\Procedural;
 
 use mysqli;
 use mysqli_result;
+use OutOfBoundsException;
 use RuntimeException;
 use WebServCo\Configuration\Service\Legacy\Procedural\Cfg;
 
@@ -80,6 +81,13 @@ final class Db
             return self::$mysqli;
         }
 
+        try {
+            $port = Cfg::getInt('DB_PORT');
+        } catch (OutOfBoundsException) {
+            // Configuration key "APP_DB_PORT" does not exist.
+            $port = 3306;
+        }
+
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
         self::$mysqli = new mysqli(
@@ -87,7 +95,7 @@ final class Db
             Cfg::getString('DB_USER'),
             Cfg::getString('DB_PASSWORD'),
             Cfg::getString('DB_NAME'),
-            Cfg::getInt('DB_PORT'),
+            $port,
         );
 
         self::$mysqli->set_charset('utf8mb4');
