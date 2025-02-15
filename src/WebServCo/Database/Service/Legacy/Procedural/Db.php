@@ -123,17 +123,16 @@ final class Db
 
     /**
      * Gets the affected rows after a query like: INSERT, UPDATE, DELETE.
-     * 
-     * @return int|string Number of affected rows. Returns a string if the number of affected rows exceeds PHP_INT_MAX. 
+     *
+     * @return int|string Number of affected rows. Returns a string if the number of affected rows exceeds PHP_INT_MAX.
      *                    See: https://www.php.net/manual/en/mysqli.affected-rows.php#refsect1-mysqli.affected-rows-returnvalues
      */
     public static function affectedRows(): int|string
     {
         $mysqli = self::link();
-        
+
         return $mysqli->affected_rows;
     }
-
 
     /**
      * Performs a query on the database.
