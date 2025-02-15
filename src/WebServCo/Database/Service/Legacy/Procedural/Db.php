@@ -12,6 +12,7 @@ use WebServCo\Configuration\Service\Legacy\Procedural\Cfg;
 
 use function array_key_exists;
 use function is_array;
+use function is_scalar;
 use function is_string;
 use function mysqli_data_seek;
 use function mysqli_fetch_array;
@@ -162,7 +163,13 @@ final class Db
             throw new RuntimeException('Field not found.');
         }
 
-        return $row[$field];
+        $result = $row[$field];
+
+        if (is_scalar($result) || $result === null) {
+            return $result;
+        }
+
+        throw new RuntimeException('Unexpected type.');
     }
 
     /**
