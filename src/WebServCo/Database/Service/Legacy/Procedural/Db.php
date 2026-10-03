@@ -27,6 +27,10 @@ use const MYSQLI_REPORT_STRICT;
  * Database abstraction class using ext/mysqli.
  *
  * Legacy code patching/migration; uses static methods in order to avoid manually modifying all procedural functions.
+ *
+ * @SuppressWarnings("PHPMD.ShortClassName")
+ * @SuppressWarnings("PHPMD.StaticAccess")
+ * @SuppressWarnings("PHPMD.TooManyPublicMethods")
  */
 final class Db
 {
