@@ -14,7 +14,6 @@ use function array_key_exists;
 use function is_array;
 use function is_scalar;
 use function is_string;
-use function mysqli_data_seek;
 use function mysqli_fetch_array;
 use function mysqli_fetch_assoc;
 use function mysqli_report;
@@ -156,7 +155,7 @@ final class Db
      */
     public static function result(mysqli_result $result, int $offset, int|string $field): bool|int|float|string|null
     {
-        mysqli_data_seek($result, $offset);
+        $result->data_seek($offset);
         $row = is_string($field)
             ? mysqli_fetch_assoc($result)
             : mysqli_fetch_array($result, MYSQLI_NUM);
