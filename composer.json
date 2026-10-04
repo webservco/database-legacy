@@ -27,7 +27,7 @@
     "require": {
         "php" : "^8.4",
         "ext-mysqli": "*",
-	    "webservco/configuration-legacy": "^1"
+	    "webservco/configuration-legacy": "^2"
     },
     "require-dev": {
         "pds/skeleton": "^1",
