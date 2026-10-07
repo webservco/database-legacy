@@ -8,10 +8,8 @@ Requires: `webservco/configuration-legacy`.
 
 ## Setup
 
-Composer require:
-
-```json
-"webservco/database-legacy": "^0"
+```shell
+composer require webservco/database-legacy
 ```
 
 ## Usage
