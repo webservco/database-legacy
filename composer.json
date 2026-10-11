@@ -20,7 +20,7 @@
             "dealerdirect/phpcodesniffer-composer-installer": true
         }
     },
-    "description" : "A PHP component/library.",
+    "description" : "A PHP component/library. Static mysqli helper for moving old ext/mysql code to PHP 8 without rewriting it.",
     "homepage" : "https://webserv.co",
     "keywords" : [
         "component",

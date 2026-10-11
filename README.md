@@ -1,32 +1,67 @@
 # webservco/database-legacy
 
-Helper for legacy projects that have to use a procedural approach.
+A PHP component/library. Please see [webservco/sandbox](https://webservco.github.io/sandbox/) for an example project using these types of components.
 
-Can we used when upgrading code from PHP 5 to PHP 8.
+Static mysqli helper for moving old ext/mysql code to PHP 8 without rewriting it.
 
-Requires: `webservco/configuration-legacy`.
+- Requires: `ext-mysqli`, database settings loaded with `webservco/configuration-legacy`
+- Related: `webservco/database` (PDO, for new code)
 
-## Setup
+---
+
+## Installation
 
 ```shell
 composer require webservco/database-legacy
 ```
 
+---
+
 ## Usage
 
+Load the configuration first (see `webservco/configuration-legacy`). The connection opens on the first query.
+
 ```php
-use \WebServCo\Database\Service\Legacy\Procedural\Db;
+use WebServCo\Database\Service\Legacy\Procedural\Db;
 
 $result = Db::query(
-    sprintf("SELECT something FROM somewhere WHERE id = %s"),
-    Db::escape($validatedInput),
+    sprintf("SELECT something FROM somewhere WHERE id = '%s'", Db::escape($validatedInput)),
 );
 $something = Db::result($result, 0, 0);
 ```
 
 ---
 
-## Convert ext/mysql to ext/mysqli using helper `Db` class
+## Contracts
+
+| Interface | Implementation | Purpose |
+| --- | --- | --- |
+| none | `Service\Legacy\Procedural\Db` | Static replacements for `mysql_*` functions, plus transactions. |
+
+Namespaces are relative to `WebServCo\Database\`.
+
+---
+
+## Configuration
+
+```ini
+[Database]
+
+DB_HOST = 127.0.0.1
+; Optional, defaults to 3306.
+DB_PORT = 3306
+DB_USER = db
+DB_PASSWORD = db
+DB_NAME = db
+```
+
+---
+
+## Notes
+
+### Convert ext/mysql calls to the `Db` helper
+
+Each command finds the PHP files under `public` that use the function and rewrites the calls. It needs `ag` (The Silver Searcher). Commit or back up before running them.
 
 ```shell
 # mysql_query
@@ -50,3 +85,24 @@ ag --php -l -Q 'mysql_num_rows(' public | xargs sed -i -e "s#mysql_num_rows(#\\\
 # mysql_result
 ag --php -l -Q 'mysql_result(' public | xargs sed -i -e "s#mysql_result(#\\\WebServCo\\\Database\\\Service\\\Legacy\\\Procedural\\\Db::result(#g"
 ```
+
+---
+
+## Development
+
+```shell
+# Start project.
+ddev start
+# Install dependencies.
+ddev c u
+# Run all validations.
+ddev c c
+# Run unit tests.
+ddev c test:dox
+```
+
+---
+
+## License
+
+[MIT](LICENSE.md)
